@@ -1,0 +1,26 @@
+volumes:
+  postgres-data:
+  bundler-gems:
+
+services:
+  ruby:
+    container_name: gol-ruby
+    build:
+      context: .
+      dockerfile: docker/ruby/Dockerfile
+    env_file:
+      - .env
+    volumes:
+      - .:/workdir
+      - bundler-gems:/usr/local/bundle/
+    ports:
+      - 3000:3000
+  postgres:
+    container_name: gol-postgres
+    image: postgres:12
+    env_file:
+      - .env
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
