@@ -1,6 +1,6 @@
 class Board < ApplicationRecord
-  BOARD_COLS = 100
-  BOARD_ROWS = 100
+  BOARD_COLS = 50
+  BOARD_ROWS = 50
 
   has_many :stages, dependent: :destroy
   before_create :set_name
