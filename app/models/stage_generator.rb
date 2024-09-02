@@ -9,7 +9,7 @@ class StageGenerator
       affected = []
     
       cells.flatten.each do |cell|
-        if(cell.live? && cell.live_neighbours.length < 2)
+        if ((cell.live? && (cell.live_neighbours.length < 2 || cell.live_neighbours.length > 3)) || (cell.dead? && cell.live_neighbours.length == 3))
           affected.push cell
         end
       end
