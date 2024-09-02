@@ -1,10 +1,12 @@
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { useParams } from 'react-router-dom';
+import { useState } from 'react';
 import Header from './Header';
 import CellRow from './CellRow';
 
 function Board() {
     let { boardId } = useParams();
+    const [number, setNumber] = useState(1);
     const queryClient = useQueryClient();
     queryClient.invalidateQueries({ queryKey: ['boardData'] });
     const { isPending, data, refetch } = useQuery({
@@ -16,9 +18,17 @@ function Board() {
     });
 
     const handleNextStage = () => {
-        fetch('http://localhost:3000/api/boards/' + boardId + '/next').then(() => {
+        const url = new URL('http://localhost:3000/api/boards/' + boardId + '/next');
+        url.searchParams.append('number', number);
+
+        fetch(url.toString()).then(() => {
           refetch();
         });
+    };
+
+    const handleOnChange = event => {
+        const { value } = event.target;
+        setNumber(value);
     };
 
     if (isPending) return 'Loading...'
@@ -37,16 +47,10 @@ function Board() {
                     </div>
                     </div>
                     <div className="ml-4 mt-4 flex flex-shrink-0">
-                    <button type="button" className="relative inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50" onClick={handleNextStage}>
-                        <span>Next stage</span>
-                    </button>
-                    <button type="button" className="relative ml-3 inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">
-                        <svg className="-ml-0.5 mr-1.5 h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                            <path d="M3 4a2 2 0 00-2 2v1.161l8.441 4.221a1.25 1.25 0 001.118 0L19 7.162V6a2 2 0 00-2-2H3z" />
-                            <path d="M19 8.839l-7.77 3.885a2.75 2.75 0 01-2.46 0L1 8.839V14a2 2 0 002 2h14a2 2 0 002-2V8.839z" />
-                        </svg>
-                        <span>Email</span>
-                    </button>
+                        <button type="button" className="relative inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50" onClick={handleNextStage}>
+                            <span>Next stage</span>
+                        </button>
+                        <input type="number" className="ml-2 w-12 border border-gray-300 rounded-md p-1 text-sm text-gray-900" value={number} onChange={handleOnChange} />
                     </div>
                 </div>
             </div>
