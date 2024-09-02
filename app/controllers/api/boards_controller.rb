@@ -9,9 +9,10 @@ module Api
     end
 
     def create
-      @board = Board.new(board_params)
+      @board = Board.new
       
       if @board.save
+        @board.random_next_stage!
         render json: @board, status: :created
       else
         render json: @board.errors, status: :unprocessable_entity
@@ -28,6 +29,9 @@ module Api
       else
         @board.next_stage!
       end
+
+      @board.reload
+      
       render json: @board
     end
 
@@ -35,10 +39,6 @@ module Api
 
     def find_board
       @board = Board.find(params[:id])
-    end
-
-    def board_params
-      params.require(:board).permit(:name, stages_attributes: [ :number ])
     end
   end
 end
