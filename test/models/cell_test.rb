@@ -25,7 +25,7 @@ class CellTest < ActiveSupport::TestCase
 
   test "dead? returns false if live" do
     @cell.live!
-    refute @cell.dead?
+    assert_not @cell.dead?
   end
 
   test "live? returns true if live" do
@@ -35,7 +35,7 @@ class CellTest < ActiveSupport::TestCase
 
   test "live? returns false if dead" do
     @cell.dead!
-    refute @cell.live?
+    assert_not @cell.live?
   end
 
   test "toggle! changes live to dead" do

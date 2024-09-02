@@ -12,7 +12,7 @@ class Board < ApplicationRecord
 
   def cell_at(x, y)
     return if x.negative? || y.negative?
-    
+
     if cells[x]
       cells[x][y]
     end

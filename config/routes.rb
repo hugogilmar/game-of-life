@@ -10,9 +10,9 @@ Rails.application.routes.draw do
   get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
 
   # Define a resource route for boards
-  resources :boards, only: [:index]
+  resources :boards, only: [ :index ]
   namespace :api do
-    resources :boards, only: [:index, :create, :show] do
+    resources :boards, only: [ :index, :create, :show ] do
       member do
         get :next
       end

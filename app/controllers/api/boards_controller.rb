@@ -1,7 +1,7 @@
 module Api
   class BoardsController < ApplicationController
     skip_before_action :verify_authenticity_token, only: :create
-    before_action :find_board, only: [:show, :next]
+    before_action :find_board, only: [ :show, :next ]
 
     def index
       @boards = Board.all
@@ -10,7 +10,7 @@ module Api
 
     def create
       @board = Board.new
-      
+
       if @board.save
         @board.random_next_stage!
         render json: @board, status: :created
@@ -31,7 +31,7 @@ module Api
       end
 
       @board.reload
-      
+
       render json: @board
     end
 
