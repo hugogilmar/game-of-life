@@ -1,8 +1,7 @@
 class Cell
   attr_reader :board, :x, :y
-  def initialize(board, x, y)
-    @board, @x, @y = board, x, y
-    @live = false
+  def initialize(board, x, y, live)
+    @board, @x, @y, @live = board, x, y, live
   end
 
   def dead?
@@ -27,22 +26,23 @@ class Cell
 
   def neighbours
     neighbours = []
-    neighbours.push(@board.cell_at(self.x - 1, self.y - 1))
-    neighbours.push(@board.cell_at(self.x - 1, self.y))
-    neighbours.push(@board.cell_at(self.x - 1, self.y + 1))
+    neighbours.push(@board.cell_at(x - 1, y - 1))
+    neighbours.push(@board.cell_at(x - 1, y))
+    neighbours.push(@board.cell_at(x - 1, y + 1))
 
-    neighbours.push(@board.cell_at(self.x, self.y - 1))
-    neighbours.push(@board.cell_at(self.x, self.y + 1))
+    neighbours.push(@board.cell_at(x, y - 1))
+    neighbours.push(@board.cell_at(x, y + 1))
 
-    neighbours.push(@board.cell_at(self.x + 1, self.y - 1))
-    neighbours.push(@board.cell_at(self.x + 1, self.y))
-    neighbours.push(@board.cell_at(self.x + 1, self.y + 1))
+    neighbours.push(@board.cell_at(x + 1, y - 1))
+    neighbours.push(@board.cell_at(x + 1, y))
+    neighbours.push(@board.cell_at(x + 1, y + 1))
 
+    neighbours.compact!
     neighbours
   end
 
   def live_neighbours
-    self.neighbours.select do |n|
+    neighbours.select do |n|
         n && n.live?
     end
   end
