@@ -5,6 +5,11 @@ const config = {
   sourcemap: "external",
   entrypoints: ["app/javascript/application.js"],
   outdir: path.join(process.cwd(), "app/assets/builds"),
+  compilerOptions: {
+    paths: {
+      "@components/*": ["./components/*"]
+    }
+  }
 };
 
 const build = async (config) => {
