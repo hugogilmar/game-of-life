@@ -9,6 +9,16 @@ Rails.application.routes.draw do
   get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
   get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
 
+  # Define a resource route for boards
+  resources :boards, only: [:index]
+  namespace :api do
+    resources :boards, only: [:index, :create, :show] do
+      member do
+        get :next
+      end
+    end
+  end
+
   # Defines the root path route ("/")
-  # root "posts#index"
+  root "boards#index"
 end
