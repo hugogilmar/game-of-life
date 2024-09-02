@@ -3,11 +3,9 @@ import Uncheck from '../components/CircleUncheck';
 
 function Cell({ live }) {
     return (
-        <div>
-            <button className="inline-block w-96 h-96 px-8 bg-indigo-600 font-mono text-white">
-                {live ? <Check /> : <Uncheck />}
-            </button>
-        </div>
+        <button className="inline-block flex items-center justify-items-center size-5 bg-slate-300 font-mono text-white">
+            {live ? <Check /> : <Uncheck />}
+        </button>
     );
 }
 
