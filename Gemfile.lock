@@ -203,7 +203,7 @@ GEM
       zeitwerk (~> 2.6)
     rainbow (3.1.1)
     rake (13.2.1)
-    random_name_generator (2.1.0)
+    random_name_generator (3.0.0)
     rdoc (6.7.0)
       psych (>= 4.0.0)
     regexp_parser (2.9.2)
@@ -298,7 +298,7 @@ DEPENDENCIES
   pg (~> 1.5)
   puma (>= 5.0)
   rails (~> 7.2.1)
-  random_name_generator (~> 2.1.0)
+  random_name_generator (~> 3.0.0)
   rubocop
   rubocop-rails-omakase
   selenium-webdriver

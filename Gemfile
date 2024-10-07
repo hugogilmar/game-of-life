@@ -36,7 +36,7 @@ gem "bootsnap", require: false
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
 
-gem "random_name_generator", "~> 2.1.0"
+gem "random_name_generator", "~> 3.0.0"
 gem "active_model_serializers", "~> 0.10.0"
 
 group :development, :test do
